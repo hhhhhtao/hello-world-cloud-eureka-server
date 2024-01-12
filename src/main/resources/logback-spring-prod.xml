@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 根节点 -->
+<configuration>
+
+    <!-- 日志文件存储位置，不使用相对路径 -->
+    <property name="LOG_PATH" value="/Users/pigtao/Desktop/hhhhhtao/project-repertory/hello-world-cloud/hello-world-cloud-eureka-server/hello-world-cloud-eureka-server/logs" />
+    <!-- 日志文件名 -->
+    <property name="LOG_NAME" value="hello-world-cloud-eureka-server" />
+
+    <!--控制台日志， 控制台输出 -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度，%logger{50}: 日志信息所属类的全名，%msg：日志消息，%n是换行符-->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 滚动记录日志文件 -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 发生滚动时的行为-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 日志文件输出的文件名 -->
+            <fileNamePattern>${LOG_PATH}/${LOG_NAME}.%d.log</fileNamePattern>
+            <!-- 文件保留天数 -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度，%logger{50}: 日志信息所属类的全名，%msg：日志消息，%n是换行符-->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="FILE" />
+    </root>
+
+</configuration>
